@@ -1,0 +1,133 @@
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: #1a1a1a;
+	overflow: hidden;
+}
+
+#scene, #control {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+}
+
+#control {
+	right: 0;
+	height: 100%;
+	width: 450px;
+	font-size: 14px;
+}
+
+#control li {
+	font-size: 12px;
+}
+
+#scene .container {
+	position: absolute;
+}
+
+#scene {
+	cursor: pointer;
+}
+
+#scene .background {
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	width: 100%;
+	height: 100%;
+}
+
+#sceneBackground {
+	background: #00ffa2;
+}
+
+#instructions a {
+	font-weight: normal;
+	padding: .2em .3em;
+	text-decoration: none;
+	outline: none;
+}
+
+#control .snippet {
+	font-family: mono;
+	border: 1px solid white;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding: 7px;
+	margin: 5px 0;
+}
+
+#control .keyword {
+	font-weight: bold;
+	color: #834EDE;
+}
+
+#control .string {
+	color: #DED337;
+}
+
+#control .boolean {
+	color: #85DE4E;
+}
+
+#control .selector {
+	border: none;
+	background: transparent;
+	color: #f2e900;
+	font-family: mono;
+	width: 100px;
+}
+
+#control .return, #control .clone {
+	position: relative;
+	z-index: 1;
+	background: inherit;
+	cursor: pointer;
+}
+
+#control .return {
+	background: #3D3644;
+}
+
+#control .oHidden {
+	overflow: hidden;
+}
+
+#control .false, #control .true {
+	position: relative;
+	z-index: 0;
+}
+
+#control .false {
+	margin-left: -50px;
+}
+
+#control .true {
+	margin-left: -35px;
+}
+
+#control .float {
+	float: right;
+	position: relative;
+	bottom: 21px;
+}
+
+#control .float a {
+	text-decoration: none;
+	outline: none;
+	padding: 2px 4px;
+	margin-left: 5px;
+}
+
+#control .remove {
+	visibility: hidden;
+}

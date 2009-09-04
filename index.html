@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>EventSound: audible jQuery events</title>
+		<link rel="stylesheet" type="text/css" media="all"  href="index.css" />
+		<link rel="stylesheet" type="text/css" media="all"  href="ui.css" />
+	</head>
+	<body>
+		<script>document.body.style.display = "none";</script>
+		<div id="scene" class="">
+			<div id="sceneBackground" class="background"></div>
+			<div class="container">
+				<div class="background"></div>
+				<div class="container">
+					<div class="background"></div>
+					<div  class="container">
+						<div class="background"></div>
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div id="control">
+			<ul>
+				<li><a href="#instructions">Instructions</a></li>
+				<li><a href="#bind">Bind</a></li>
+				<li><a href="#live">Live</a></li>
+				<li><a href="#trigger">Trigger</a></li>
+				<li><a href="#custom">Custom</a></li>
+			</ul>
+			<div id="instructions">
+				<p>
+					The elements on the scene can be cloned using the following button. Clicking on "clone" adds the true parameter.
+					It has to be carefully desactivated after use.
+				</p>
+				<a id="cloneBtn" class="ui-state-default ui-corner-all" href="#">$(event.target).<span class="clone">clone(&nbsp;</span><span class="boolean oHidden"><span class="true">true</span></span>&nbsp;);</a>
+			</div>
+			<div id="bind">
+				<div class="snippet bind">
+					<div>$(<span class="string">"<input class="selector" type="text" />"</span>).click(<span class="keyword">function</span>( event ) {</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;$(even.target).play();</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword return">return</span><span class="boolean oHidden"><span class="false">&nbsp;false</span></span>;</div>
+					<div>)};</div>
+					<span class="float"><a href="#" class="remove ui-state-default ui-corner-all">-</a><a href="#" class="add ui-state-default ui-corner-all">+</a></span>
+				</div>				
+			</div>
+			<div id="live">
+				<div class="snippet live">
+					<div>$(<span class="string">"<input class="selector" type="text" />"</span>).click(<span class="keyword">function</span>( event ) {</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;$(even.target).play();</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword return">return</span><span class="boolean oHidden"><span class="false">&nbsp;false</span></span>;</div>
+					<div>)};</div>
+					<span class="float"><a href="#" class="remove ui-state-default ui-corner-all">-</a><a href="#" class="add ui-state-default ui-corner-all">+</a></span>
+				</div>
+			</div>
+			<div id="trigger">
+				
+			</div>
+			<div id="custom">
+				
+			</div>
+		</div>
+		<script src="jquery.js"></script>
+		<script src="ui.core.js"></script>
+		<script src="ui.tabs.js"></script>
+		<script src="jquery.cookie.js"></script>
+		<script src="jquery.scene.js"></script>
+		<script src="jquery.control.js"></script>
+		<script>
+			$(function() {
+				$("#control").tabs({cookie: {}}).control($("#scene").scene());
+				$(document.body).css("display", "block");
+			});
+		</script>
+	</body>
+</html>
