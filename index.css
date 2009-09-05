@@ -95,12 +95,12 @@ body {
 	color: #85DE4E;
 }
 
-#control .selector {
+#control .selectorId, #control .selectorClass {
 	border: none;
 	background: transparent;
 	color: #f2e900;
 	font-family: mono;
-	width: 100px;
+	width: 80px;
 }
 
 #control .float {

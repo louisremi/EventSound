@@ -37,7 +37,7 @@
 			</div>
 			<div id="bind">
 				<div class="snippet bind">
-					<div>$(<span class="string">"<input class="selector" type="text" />"</span>).click(<span class="keyword">function</span>( event ) {</div>
+					<div>$(<span class="string">"<input class="selectorId" type="text" />"</span>).click(<span class="keyword">function</span>( event ) {</div>
 					<div>&nbsp;&nbsp;&nbsp;&nbsp;$(event.target).play();</div>
 					<div class="comment">&nbsp;&nbsp;&nbsp;&nbsp;<span class="slash">//</span><span class="keyword">return</span> <span class="boolean">false</span>;</div>
 					<div>)};</div>
@@ -46,7 +46,8 @@
 			</div>
 			<div id="live">
 				<div class="snippet live">
-					<div>$(<span class="string">"<input class="selector" type="text" />"</span>).live(<span class="string">"click"</span>, <span class="keyword">function</span>( event ) {</div>
+					<div>$(<span class="string">"<input class="selectorId" type="text" />"</span>).find(<span class="string">"<input class="selectorClass" type="text" />"</span>).live(<span class="string">"click"</span>,</div>
+					<div><span class="keyword">function</span>( event ) {</div>
 					<div>&nbsp;&nbsp;&nbsp;&nbsp;$(event.currentTarget).play();</div>
 					<div>)};</div>
 					<span class="float"><a href="#" class="remove ui-state-default ui-corner-all">-</a><a href="#" class="add ui-state-default ui-corner-all">+</a></span>

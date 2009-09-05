@@ -8,10 +8,13 @@ $.fn.control = function( $scene ) {
 		.children(".slash").toggle().end()
 		.closest(".snippet").trigger("update");
 		
-	}).end().find("input.selector").live("click", function( event ) {
-		var $snippet = $(event.target).closest(".snippet")
-		$this.data("focus", $snippet);
-		$scene.addClass($snippet.is(".bind")? "bind" : "live");
+	}).end().find("input.selectorId").live("click", function( event ) {
+		$this.data("focus", $(event.target).closest(".snippet"));
+		$scene.addClass("queryId");
+		
+	}).end().find("input.selectorClass").live("click", function( event ) {
+		$this.data("focus", $(event.target).closest(".snippet"));
+		$scene.addClass("queryClass");
 		
 	}).live("keypress", function( event ) {
 		$(event.currentTarget).closest(".snippet").trigger("update");
@@ -43,9 +46,10 @@ $.fn.control = function( $scene ) {
 		
 	});
 	
-	$scene.bind("query", function( event, id ) {
-		$scene.removeClass("query");
-		$this.data("focus").find('.selector').attr("value", "#"+id)
+	$scene.bind("query", function( event, selector ) {
+		var isQueryId = $scene.is(".queryId");
+		$scene.removeClass(isQueryId? "queryId" : "queryClass");
+		$this.data("focus").find(isQueryId? '.selectorId' : ".selectorClass").attr("value", selector)
 		.end().trigger("update");
 	});
 	

@@ -22,8 +22,8 @@ $.fn.scene = function() {
 		if(event.target != this) {
 			var $container = $(event.target).getContainer();
 			if($this.is(".clone")) $container.cloneKey($this.is(".true"));
-			else if($this.is(".bind")) $this.trigger("query", [$container.attr('id')]);
-			else if($this.is(".live")) $this.trigger("query", [$container.attr('id')]);
+			else if($this.is(".queryId")) $this.trigger("query", ["#"+$container.attr('id')]);
+			else if($this.is(".queryClass")) $this.trigger("query", ["."+$container.attr('class').match(/(lvl\d)/)[0]]);
 			else $container.addToWaitingBeat();
 		}		
 	})
@@ -113,7 +113,7 @@ $.scene = {
 	}, beatInterval: null,
 	instantPlay: function() {
 		$($.scene.instant).css("opacity", .3).trigger("end");
-		$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).trigger("play");
+		$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).triggerHandler("play");
 	}, instantInterval: null,
 	// One array by level, doesn't scale.
 	waitingBeat: [[], [], [], []],
