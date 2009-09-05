@@ -64,7 +64,7 @@ $.fn.addToWaitingBeat = function() {
 	return this.each(function() {
 		var $this = $(this),
 			background = $this.children(".background")[0],
-			level = $this.data("position").length,
+			level = $this.data("position").length -1,
 			list;
 		for(; level > -1; --level, $this = $this.parent(), background = $this.children(".background")[0]) {
 			list = $.scene.waitingBeat[level]
