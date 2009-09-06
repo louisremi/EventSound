@@ -94,6 +94,10 @@ body {
 	color: #DED337;
 }
 
+#control .number {
+	color: #DE4E58;
+}
+
 #control .boolean, 
 #control .un .boolean, 
 #control .un .un .boolean {

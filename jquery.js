@@ -103,12 +103,13 @@ jQuery.fn = jQuery.prototype = {
 
 			// HANDLE: $(expr, $(...))
 			} else if ( !context || context.jquery ) {
+				if(context && context.length == 1) context.context = context[0];
 				return (context || rootjQuery).find( selector );
 
 			// HANDLE: $(expr, context)
 			// (which is just equivalent to: $(context).find(expr)
 			} else {
-				return jQuery( context ).find( selector );
+				return jQuery( selector, jQuery( context ));
 			}
 
 		// HANDLE: $(function)

@@ -29,7 +29,7 @@ $.fn.scene = function() {
 	})
 	.children(".container").organize(width, [null]).end()
 	.children(".background").css("opacity", .3).end()
-	.data("position", []);
+	.data("position", [null]);
 	
 	$.scene.setIntervals(3.6)
 	
