@@ -5,7 +5,7 @@ $.fn.control = function( $scene ) {
 			cookie: {},
 			show: function() {
 				// Disable clone mode when switching tab
-				if($scene.is(".clone")) $("div.clone .comment:first").trigger("click");
+				if($scene.is(".clone")) $("#instructions div.comment:eq(1)").trigger("click");
 			}
 		}).children("div").cloneSnippet( true ).end(),
 		keypressTimeout,
