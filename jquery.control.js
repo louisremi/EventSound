@@ -16,9 +16,7 @@ $.fn.control = function( $scene ) {
 		.closest(".snippet").trigger("update");
 	
 	// Set the scene to query mode when an selector input is clicked	
-	}).end().find("input.selectorId").live("click", queryMode
-		
-	).end().find("input.selectorClass").live("click", queryMode
+	}).end().find("input").live("click", queryMode
 	
 	// Update the snippet when an input is modified
 	).end().find("input.selectorId").live("keypress", keypress
@@ -74,6 +72,7 @@ $.fn.control = function( $scene ) {
 	});
 	
 	$scene.bind("query", function( event, selector ) {
+		console.info(selector)
 		var isQueryId = $scene.is(".queryId");
 		$scene.removeClass(isQueryId? "queryId" : "queryClass");
 		$this.data("focus").find(isQueryId? '.selectorId' : ".selectorClass").attr("value", selector)
@@ -85,7 +84,7 @@ $.fn.control = function( $scene ) {
 	// Set the scene to query mode: when an element is clicked, a corresponding selector is returned
 	function queryMode( event ) {
 		$this.data("focus", $(event.target).closest(".snippet"));
-		$scene.addClass("query" + $(event.currentTarget).is(".selectorId")? "Id" : "Class");
+		$scene.addClass("query" + ($(event.target).is(".selectorId")? "Id" : "Class"));
 	};
 	
 	// Debounce keypress event and update the associated snippet
