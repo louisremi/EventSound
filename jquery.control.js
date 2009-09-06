@@ -84,7 +84,6 @@ $.fn.control = function( $scene ) {
 	});
 	
 	$scene.bind("query", function( event, selector ) {
-		console.info(selector)
 		var isQueryId = $scene.is(".queryId");
 		$scene.removeClass(isQueryId? "queryId" : "queryClass");
 		$this.data("focus").find(isQueryId? '.selectorId' : ".selectorClass").attr("value", selector)
