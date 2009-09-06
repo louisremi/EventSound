@@ -64,6 +64,7 @@ body {
 	-webkit-border-radius: 3px;
 	padding: 7px;
 	margin: 5px 0;
+	display: none;
 }
 
 #control .comment, 
@@ -114,8 +115,4 @@ body {
 	outline: none;
 	padding: 2px 4px;
 	margin-left: 5px;
-}
-
-#control .remove {
-	visibility: hidden;
 }

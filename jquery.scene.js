@@ -31,8 +31,8 @@ $.fn.scene = function() {
 	.children(".background").css("opacity", .3).end()
 	.data("position", []);
 	
-	$.scene.beatInterval = setInterval($.scene.beatPlay, 1200);
-	$.scene.instantInterval = setInterval($.scene.instantPlay, 300);
+	$.scene.beatInterval = setInterval($.scene.beatPlay, 4000);
+	$.scene.instantInterval = setInterval($.scene.instantPlay, 1000);
 	
 	return $this;
 }
@@ -69,6 +69,7 @@ $.fn.addToWaitingBeat = function() {
 		for(; level > -1; --level, $this = $this.parent(), background = $this.children(".background")[0]) {
 			list = $.scene.waitingBeat[level]
 			if($.inArray(background, list) == -1) list.push(background);
+			if($this.is(".false")) break;
 		}
 	});
 };
@@ -113,7 +114,7 @@ $.scene = {
 	}, beatInterval: null,
 	instantPlay: function() {
 		$($.scene.instant).css("opacity", .3).trigger("end");
-		$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).triggerHandler("play");
+		$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).trigger("play");
 	}, instantInterval: null,
 	// One array by level, doesn't scale.
 	waitingBeat: [[], [], [], []],
