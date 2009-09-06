@@ -29,6 +29,24 @@
 				<li><a href="#custom">Custom</a></li>
 			</ul>
 			<div id="instructions">
+				<p>
+					EventSound is an interface aimed at teaching how events work in the DOM and 
+					how they can be used in jQuery. 
+				</p>
+				<p>
+					The main characteristics about events in Web pages is that some of them bubble
+					in the DOM: they do not only occur on the target element but also on its parents
+					and its parent's parent... all of its ancestors. 
+				</p>
+				<p>
+					On the left panel, the <strong>scene</strong>, the bubbling phase has been decomposed
+					so that it is possible to visualize how this bubbling occur.
+				</p>
+				<p>
+					The "bubble beat" can be modified with the following slider if it is too slow.
+				</p>
+				<div id="bubblebeat"></div><div id="beatDisplay"><span>3.6</span>s</div>
+				
 				<div class="snippet clone">
 					<div>$(<span class="string">"#scene"</span>).click(<span class="keyword">function</span>( event ) {</div>
 					<div class="comment">&nbsp;&nbsp;&nbsp;&nbsp;<span class="slash">//</span>$(even.target).clone(<span class="comment"><span class="slash">/*</span><span class="boolean">true</span><span class="slash">*/</span></span>).insertGently();</div>
@@ -63,6 +81,7 @@
 		<script src="jquery.js"></script>
 		<script src="ui.core.js"></script>
 		<script src="ui.tabs.js"></script>
+		<script src="ui.slider.js"></script>
 		<script src="jquery.cookie.js"></script>
 		<script src="jquery.scene.js"></script>
 		<script src="jquery.control.js"></script>

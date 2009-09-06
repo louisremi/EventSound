@@ -8,7 +8,19 @@ $.fn.control = function( $scene ) {
 				if($scene.is(".clone")) $("div.clone .comment:first").trigger("click");
 			}
 		}).children("div").cloneSnippet( true ).end(),
-		keypressTimeout;
+		keypressTimeout,
+		$beatDisplay = $("#beatDisplay span"),
+		$bubblebeat = $("#bubblebeat").slider({
+			min: 1.2,
+			max: 4.8,
+			step: 1.2,
+			value: 3.6,
+			change: function( event ) {
+				var beatValue = $bubblebeat.slider("value")
+				$beatDisplay.text(beatValue);
+				$.scene.setIntervals(beatValue);
+			}
+		});
 	
 	$this.find(".comment").live("click", function( event ) {
 		$(event.currentTarget).toggleClass("un")

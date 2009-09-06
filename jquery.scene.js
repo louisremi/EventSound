@@ -31,8 +31,7 @@ $.fn.scene = function() {
 	.children(".background").css("opacity", .3).end()
 	.data("position", []);
 	
-	$.scene.beatInterval = setInterval($.scene.beatPlay, 4000);
-	$.scene.instantInterval = setInterval($.scene.instantPlay, 1000);
+	$.scene.setIntervals(3.6)
 	
 	return $this;
 }
@@ -108,14 +107,21 @@ $.scene = {
 		'#002aff',
 		'#90ff00',
 		'#ff00f6'
-	], beatPlay: function() {
-		$.scene.beat = $.scene.waitingBeat.slice(0);
-		$.scene.waitingBeat = [[], [], [], []];
-	}, beatInterval: null,
-	instantPlay: function() {
-		$($.scene.instant).css("opacity", .3).trigger("end");
-		$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).trigger("play");
-	}, instantInterval: null,
+	],
+	beatInterval: null,
+	instantInterval: null,
+	setIntervals: function( time ) {
+		clearInterval($.scene.beatInterval);
+		clearInterval($.scene.instantInterval);
+		$.scene.beatInterval = setInterval(function() {
+			$.scene.beat = $.scene.waitingBeat.slice(0);
+			$.scene.waitingBeat = [[], [], [], []];
+		}, time * 1000);
+		$.scene.instantInterval = setInterval(function() {
+			$($.scene.instant).css("opacity", .3).trigger("end");
+			$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).trigger("play");
+		}, time * 250);
+	},
 	// One array by level, doesn't scale.
 	waitingBeat: [[], [], [], []],
 	beat: [],

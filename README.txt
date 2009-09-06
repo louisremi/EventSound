@@ -1,4 +1,5 @@
 EventSound: audible jQuery events
 
 TODO: 
-- add a 
+- The event doesn't bubble up to the scene
+- add a slider for the bubblebeat
