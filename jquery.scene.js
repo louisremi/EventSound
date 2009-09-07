@@ -31,7 +31,26 @@ $.fn.scene = function() {
 	.children(".background").css("opacity", .3).end()
 	.data("position", [null]);
 	
-	$.scene.setIntervals(3.6)
+	$.scene.setIntervals(3.6);
+	
+	$(document).keydown(function( event ) {
+		if(event.keyCode == 17)
+			if(!$.scene.keyupTimer)
+				$(".container", $this).live("mouseover", function( event ) {
+					$(event.currentTarget).addClass("matrix");
+				}).live("mouseout", function( event ) {
+					var $current = $(event.currentTarget),
+						$related = $(event.relatedTarget).closest(".container", $this);
+					if(!$related.length || $current[0] != $related[0])
+						$(event.currentTarget).removeClass("matrix");
+				});
+			else clearTimeout($.scene.keyupTimer);
+	}).keyup(function( event ) {
+		$.scene.keyupTimer = setTimeout(function() {
+			if(event.keyCode == 17) $this.die("mouseover").die("mouseout").find(".matrix").removeClass("matrix");
+			$.scene.keyupTimer = null;
+		}, 150);
+	});
 	
 	return $this;
 }
@@ -80,18 +99,22 @@ $.fn.organize = function(parentWidth, position, animate) {
 			// We need to clone the position array
 			pos = position.slice(0);
 		pos.push(i);
-		$(this)[animate? "animate" : "css"]({
-			width: width,
-			height: width,
-			left: ((i %2 * 10) + 1) * step,
-			top: ((Math.floor(i /2 ) * 10) + 1) * step,			
-		}, animate? 400 : undefined)
-		.children(".background").css({
+		$(this).children(".background").css({
 			backgroundColor: $.scene.color[i],
 			opacity: .3
 		}).end()
-		.children(".container").organize(width, pos, animate).end()
-		.addClass("lvl"+pos.length).attr('id', "el"+pos.join('_')).data("position", pos);
+		.css({
+			width: width,
+			height: width
+		})[animate? "animate" : "css"]({
+			left: ((i %2 * 10) + 1) * step,
+			top: ((Math.floor(i /2 ) * 10) + 1) * step,			
+		}, animate? 400 : undefined).queue(function() {
+			$(this).children(".container").organize(width, pos, animate).end()
+			.children(".otag").html('&lt;div&nbsp;id="el'+pos.join('_')+'"&nbsp;class="lvl'+pos.length+'"&gt;').end()
+			.addClass("lvl"+pos.length).attr('id', "el"+pos.join('_')).data("position", pos)
+			.dequeue();
+		});
 	});
 };
 
@@ -110,6 +133,7 @@ $.scene = {
 	],
 	beatInterval: null,
 	instantInterval: null,
+	keyupTimer: null,
 	setIntervals: function( time ) {
 		clearInterval($.scene.beatInterval);
 		clearInterval($.scene.instantInterval);

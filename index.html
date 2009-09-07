@@ -4,17 +4,26 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>EventSound: audible jQuery events</title>
 		<link rel="stylesheet" type="text/css" media="all"  href="index.css" />
+		<link rel="stylesheet" type="text/css" media="all"  href="matrix.css" />
 		<link rel="stylesheet" type="text/css" media="all"  href="ui.css" />
 	</head>
 	<body>
 		<script>document.body.style.display = "none";</script>
 		<div id="scene" class="">
+			<span class="otag"></span>
+			<span class="ctag">&lt;/div&gt;</span>
 			<div id="sceneBackground" class="background"></div>
 			<div class="container">
+				<span class="otag"></span>
+				<span class="ctag">&lt;/div&gt;</span>
 				<div class="background"></div>
 				<div class="container">
+					<span class="otag"></span>
+					<span class="ctag">&lt;/div&gt;</span>
 					<div class="background"></div>
 					<div  class="container">
+						<span class="otag"></span>
+						<span class="ctag">&lt;/div&gt;</span>
 						<div class="background"></div>
 					</div>
 				</div>
@@ -64,7 +73,7 @@
 			</div>
 			<div id="live">
 				<div class="snippet live">
-					<div>$(<span class="string">"<input class="selectorClass" type="text" />"</span>, $(<span class="string">"<input class="selectorId" type="text" />"</span>)[<span class="number">0</span>]).live(<span class="string">"click"</span>,</div>
+					<div>$(<span class="string">"<input class="selectorClass" type="text" />"</span>, $(<span class="string">"<input class="selectorId" type="text" value="#" />"</span>)[<span class="number">0</span>]).live(<span class="string">"click"</span>,</div>
 					<div><span class="keyword">function</span>( event ) {</div>
 					<div>&nbsp;&nbsp;&nbsp;&nbsp;$(event.currentTarget).play();</div>
 					<div>)};</div>
