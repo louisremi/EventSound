@@ -22,7 +22,7 @@ $.fn.control = function( $scene ) {
 			}
 		});
 	
-	$this.find(".comment").live("click", function( event ) {
+	$(".comment", $this).live("click", function( event ) {
 		$(event.currentTarget).toggleClass("un")
 		.children(".slash").toggle().end()
 		.closest(".snippet").trigger("update");
@@ -76,6 +76,26 @@ $.fn.control = function( $scene ) {
 		$snippet.data("previousTarget", $target);
 		
 	}).end().find("div.live").live("update", function( event, destroy ) {
+		var $snippet = $(event.currentTarget),
+			$target = $(
+				$snippet.find(".selectorClass").attr("value"), 
+				$($snippet.find(".selectorId").attr("value"))
+			),
+			$previousTarget = $snippet.data("previousTarget");
+		if($previousTarget) $previousTarget.die("play").die("end");
+		if(!destroy && $target.length) {
+			// Bind the new event
+			$target.live("play", function( event ) {
+				if(event.target.parentNode == event.currentTarget)
+					$snippet.css("opacity", 1);
+				//return false;
+			}).live("end", function( event ) {
+				if(event.target.parentNode == event.currentTarget)
+					$snippet.css("opacity", .6);
+				//return false;
+			});
+		}
+		$snippet.data("previousTarget", $target);
 		
 	}).end().find("div.trigger").live("update", function( event, destroy ) {
 		
@@ -104,7 +124,7 @@ $.fn.control = function( $scene ) {
 		keypressTimeout = setTimeout(function() {
 			$scene.removeClass("queryClass").removeClass("queryId");
 			$(event.currentTarget).closest(".snippet").trigger("update");
-		}, 700);
+		}, 800);
 	};
 	
 	function snippetHover( event ) {
