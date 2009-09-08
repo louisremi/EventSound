@@ -45,7 +45,7 @@ $.fn.control = function( $scene ) {
 	
 	// Destroy the snippet when the - is clicked
 	).end().find("a.remove").live("click", function( event ) {
-		$(event.target).closest(".snippet").trigger("update", [true]).remove();
+		$(event.target).closest(".snippet").trigger("update", [true]).trigger("mouseout").remove();
 	
 	// Update the clone snippet
 	}).end().find("div.clone").live("update", function( event ) {
@@ -77,27 +77,29 @@ $.fn.control = function( $scene ) {
 		
 	}).end().find("div.live").live("update", function( event, destroy ) {
 		var $snippet = $(event.currentTarget),
+			selectorIdValue =  $snippet.find(".selectorId").attr("value"),
+			$context = $(selectorIdValue != "#"? selectorIdValue : ""),
 			$target = $(
 				$snippet.find(".selectorClass").attr("value"), 
-				$($snippet.find(".selectorId").attr("value"))
+				$context
 			),
-			$previousTarget = $snippet.data("previousTarget");
+			$previousTarget = $snippet.data("previous_Target");
 		if($previousTarget) $previousTarget.die("play").die("end");
 		if(!destroy && $target.length) {
 			// Bind the new event
 			$target.live("play", function( event ) {
 				if(event.target.parentNode == event.currentTarget)
 					$snippet.css("opacity", 1);
-				//return false;
+					
 			}).live("end", function( event ) {
 				if(event.target.parentNode == event.currentTarget)
-					$snippet.css("opacity", .6);
-				//return false;
+					$snippet.css("opacity", .7);
 			});
 		}
-		$snippet.data("previousTarget", $target);
+		$snippet.data("previousTarget", $context).data("previous_Target", $target);
 		
 	}).end().find("div.trigger").live("update", function( event, destroy ) {
+		$(event.currentTarget).data("previousTarget", $($snippet.find(".selectorId").attr("value")));
 		
 	}).end().find("div.custom").live("update", function( event, destroy ) {
 		
