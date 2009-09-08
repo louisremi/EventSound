@@ -69,7 +69,7 @@
 					<div class="comment">&nbsp;&nbsp;&nbsp;&nbsp;<span class="slash">//</span><span class="keyword">return</span> <span class="boolean">false</span>;</div>
 					<div>)};</div>
 					<span class="float"><a href="#" class="remove ui-state-default ui-corner-all">-</a><a href="#" class="add ui-state-default ui-corner-all">+</a></span>
-				</div>				
+				</div>
 			</div>
 			<div id="live">
 				<div class="snippet live">
@@ -81,13 +81,18 @@
 				</div>
 			</div>
 			<div id="trigger">
-				<div class="snippet live">
-					<div>$(<span class="string">"<input class="selectorId" type="text" />"</span>).trigger(<span class="string">"click"</span>);</div>
+				<div class="snippet trigger">
+					<div>$(<span class="string">"<input class="selectorId" type="text" />"</span>).trigger(<span class="string">"<input class="customEvent" type="text" value="click" />"</span>);</div>
 					<span class="float"><a href="#" class="remove ui-state-default ui-corner-all">-</a><a href="#" class="add ui-state-default ui-corner-all">+</a></span>
 				</div>
 			</div>
 			<div id="custom">
-				
+				<div class="snippet custom">
+					<div>$(<span class="string">"#scene"</span>).bind(<span class="string">"<input class="customEvent" type="text" />"</span>, <span class="keyword">function</span>( event ) {</div>
+					<div class="comment">&nbsp;&nbsp;&nbsp;&nbsp;<span class="slash">//</span>$(<span class="string">"<input class="selectorId" type="text" />"</span>).trigger(<span class="string">"click"</span>);</div>
+					<div>)};</div>
+					<span class="float"><a href="#" class="remove ui-state-default ui-corner-all">-</a><a href="#" class="add ui-state-default ui-corner-all">+</a></span>
+				</div>
 			</div>
 		</div>
 		<script src="jquery.js"></script>

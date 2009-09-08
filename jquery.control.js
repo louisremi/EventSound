@@ -45,7 +45,11 @@ $.fn.control = function( $scene ) {
 	
 	// Destroy the snippet when the - is clicked
 	).end().find("a.remove").live("click", function( event ) {
-		$(event.target).closest(".snippet").trigger("update", [true]).trigger("mouseout").remove();
+		var $snippet = $(event.target).closest(".snippet"),
+			$tab = $snippet.parent(),
+			isSingle = $tab.children(".snippet").length < 3;
+		$snippet.trigger("update", [true]).trigger("mouseout").remove();
+		if(isSingle) $tab.cloneSnippet( true );
 	
 	// Update the clone snippet
 	}).end().find("div.clone").live("update", function( event ) {
@@ -99,25 +103,58 @@ $.fn.control = function( $scene ) {
 		$snippet.data("previousTarget", $context).data("previous_Target", $target);
 		
 	}).end().find("div.trigger").live("update", function( event, destroy ) {
-		$(event.currentTarget).data("previousTarget", $($snippet.find(".selectorId").attr("value")));
+		var $snippet = $(event.currentTarget);
+		$snippet.data("previousTarget", $($snippet.find(".selectorId").attr("value")));
 		
 	}).end().find("div.custom").live("update", function( event, destroy ) {
-		
+		var $snippet = $(event.currentTarget),
+			$uncomment = $snippet.find("div.un"),
+			previousName = $snippet.data("previousName"),
+			previousFunction = $snippet.data("previousFunction"),
+			newFunction,
+			name,
+			targets = [];
+		if($uncomment.length) {
+			$uncomment.removeClass("comment").removeClass("un").after(
+				$("#custom div.comment:first").clone()
+			);
+		} else {
+			if(previousName) $scene.unbind(previousName, previousFunction);
+			if(!destroy) {
+				// Find the name of the custom event
+				name = $snippet.find(".customEvent").attr("value");
+				// Find all the selectors set
+				$snippet.find(".selectorId").each(function() {
+					if($(this).attr("value") != "") targets.push($(this).attr("value"));
+				});
+				if(name != "" && targets.length) {
+					// Create a custom function
+					newFunction = new Function("$('"+targets.join()+"').trigger('click');");
+					// Bind it
+					$scene.bind(name, newFunction);
+					// Save it
+					$snippet.data("previousName", name).data("previousFunction", newFunction);
+				}
+			}
+		}
 	});
 	
 	$scene.bind("query", function( event, selector ) {
 		var isQueryId = $scene.is(".queryId");
 		$scene.removeClass(isQueryId? "queryId" : "queryClass");
-		$this.data("focus").find(isQueryId? '.selectorId' : ".selectorClass").attr("value", selector)
-		.end().trigger("update");
+		$this.data("focus").attr("value", selector)
+		.closest(".snippet").trigger("update");
 	});
 	
 	return $this;
 	
 	// Set the scene to query mode: when an element is clicked, a corresponding selector is returned
 	function queryMode( event ) {
-		$this.data("focus", $(event.target).closest(".snippet"));
-		$scene.addClass("query" + ($(event.target).is(".selectorId")? "Id" : "Class"));
+		var $target = $(event.target);
+		if(!$target.is(".customEvent")) {
+			$this.data("focus", $target);
+			$scene.addClass("query" + ($target.is(".selectorId")? "Id" : "Class"));
+		}
 	};
 	
 	// Debounce keypress event and update the associated snippet
@@ -142,12 +179,9 @@ $.fn.control = function( $scene ) {
 
 $.fn.cloneSnippet = function( init ) {
 	return this.each(function() {
-		var $snippet = $(init? this : this.parentNode).children(".snippet:first"),
-			$clone;
-		if(init) $snippet.css("opacity", .6);
-		$clone = $snippet.clone().css("display", "block");
-		if(init) $clone.find(".remove").css("visibility", "hidden");
-		$clone.appendTo($snippet.parent());		
+		var $snippet = $(init? this : this.parentNode).children(".snippet:first");
+		if(init) $snippet.css("opacity", .6).addClass("first");
+		$snippet.clone().css("display", "block")[init? "appendTo" : "insertAfter"](init? $snippet.parent() : $snippet);
 	});
 } 
 	

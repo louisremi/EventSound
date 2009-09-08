@@ -72,7 +72,8 @@ body {
 }
 
 #control .comment, 
-#control .comment .boolean, 
+#control .comment .boolean,
+#control .comment .string, 
 #control .comment .keyword, 
 #control .comment .un .boolean,
 #control .un .comment .boolean {
@@ -104,7 +105,7 @@ body {
 	color: #85DE4E;
 }
 
-#control .selectorId, #control .selectorClass {
+#control .selectorId, #control .selectorClass, #control .customEvent {
 	border: none;
 	background: transparent;
 	color: #f2e900;
@@ -115,13 +116,13 @@ body {
 #control .float {
 	float: right;
 	position: relative;
-	bottom: 19px;
+	bottom: 18px;
 }
 
 #control .float a {
 	text-decoration: none;
 	outline: none;
-	padding: 2px 4px;
+	padding: 0 4px;
 	margin-left: 5px;
 }
 
