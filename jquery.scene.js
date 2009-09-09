@@ -140,6 +140,7 @@ $.scene = {
 		$.scene.beatInterval = setInterval(function() {
 			$.scene.beat = $.scene.waitingBeat.slice(0);
 			$.scene.waitingBeat = [[], [], [], []];
+			$(document.body).triggerHandler("feedMe");
 		}, time * 1000);
 		$.scene.instantInterval = setInterval(function() {
 			$($.scene.instant).css("opacity", .3).trigger("end");

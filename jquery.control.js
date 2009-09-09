@@ -20,6 +20,16 @@ $.fn.control = function( $scene ) {
 				$beatDisplay.text(beatValue);
 				$.scene.setIntervals(beatValue);
 			}
+		}),
+		$nextTrigger,
+		$body = $(document.body).bind("feedMe", function() {
+			if($nextTrigger) {
+				var $target = $nextTrigger.data("previousTarget"),
+					name = $nextTrigger.data("name");
+				$target.trigger(name);
+				$nextTrigger = $nextTrigger.next('.snippet');
+				if($nextTrigger.length < 1) $nextTrigger = 0;
+			}			
 		});
 	
 	$(".comment", $this).live("click", function( event ) {
@@ -104,7 +114,9 @@ $.fn.control = function( $scene ) {
 		
 	}).end().find("div.trigger").live("update", function( event, destroy ) {
 		var $snippet = $(event.currentTarget);
-		$snippet.data("previousTarget", $($snippet.find(".selectorId").attr("value")));
+		$snippet
+			.data("previousTarget", $($snippet.find(".selectorId").attr("value")))
+			.data("name", $snippet.find(".customEvent").attr("value"));
 		
 	}).end().find("div.custom").live("update", function( event, destroy ) {
 		var $snippet = $(event.currentTarget),
@@ -146,6 +158,10 @@ $.fn.control = function( $scene ) {
 		.closest(".snippet").trigger("update");
 	});
 	
+	$("#play").click(function() {
+		$nextTrigger = $(this.parentNode.parentNode).children(".snippet:eq(1)");
+	});
+	
 	return $this;
 	
 	// Set the scene to query mode: when an element is clicked, a corresponding selector is returned
@@ -181,7 +197,7 @@ $.fn.cloneSnippet = function( init ) {
 	return this.each(function() {
 		var $snippet = $(init? this : this.parentNode).children(".snippet:first");
 		if(init) $snippet.css("opacity", .6).addClass("first");
-		$snippet.clone().css("display", "block")[init? "appendTo" : "insertAfter"](init? $snippet.parent() : $snippet);
+		$snippet.clone().css("display", "block").insertAfter(init? $snippet : $(this));
 	});
 } 
 	

@@ -129,3 +129,10 @@ body {
 #instructions p {
 	text-align: justify;
 }
+
+#play {
+	text-decoration: none;
+	outline: none;
+	padding: 2px 4px;
+	margin-left: 2px;
+}
