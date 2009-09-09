@@ -41,9 +41,7 @@ $.fn.control = function( $scene ) {
 	}).end().find("input").live("click", queryMode
 	
 	// Update the snippet when an input is modified
-	).end().find("input.selectorId").live("keypress", keypress
-	
-	).end().find("input.selectorClass").live("keypress", keypress
+	).end().find("input").live("keypress", keypress
 	
 	).end().find("a.add").live("click", function( event ) {
 		$(event.target).closest(".snippet").cloneSnippet();
