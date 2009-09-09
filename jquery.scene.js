@@ -124,6 +124,20 @@ $.fn.backgroundOpacity = function( opacity ) {
 	});
 };
 
+// Here comes the Sound of EventSound
+$.fn.play = function() {
+	var $body = $(document.body);
+	return this.each(function() {
+		$body.append(
+			$('<audio src="audios/_'+$(this).data("position").slice(2).join('_')+'.ogg" autoplay="true"></audio>')
+			// "ended" doesn't bubble in Webkit, we cannot use event delegation :(
+			.bind("ended", function(event) {
+				$(event.target).remove();
+			})
+		);
+	});
+};
+
 $.scene = {
 	color: [
 		'#ff3c00',
@@ -144,7 +158,7 @@ $.scene = {
 		}, time * 1000);
 		$.scene.instantInterval = setInterval(function() {
 			$($.scene.instant).css("opacity", .3).trigger("end");
-			$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).trigger("play");
+			$($.scene.instant = $.scene.beat.pop()).css("opacity", .6).trigger("fakeClick");
 		}, time * 250);
 	},
 	// One array by level, doesn't scale.

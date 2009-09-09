@@ -1,0 +1,29 @@
+.matrix .background {
+	opacity: 1 !important;
+	background: black !important;
+	border: 1px dotted #0F0;
+}
+
+.otag, .ctag {
+	color: #0F0;
+	background: black;
+	font-size: 12px;
+	font-family: mono;
+	position: absolute;
+	display: none;
+	z-index: 100;
+}
+
+.otag {
+	top: 3px;
+	left: 3px;
+}
+
+.ctag {
+	bottom: 0px;
+	right: 3px;
+}
+
+.matrix>.otag, .matrix>.ctag {
+	display: block;
+}

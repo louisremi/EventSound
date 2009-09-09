@@ -70,12 +70,14 @@ $.fn.control = function( $scene ) {
 		var $snippet = $(event.currentTarget),
 			$target = $($snippet.find(".selectorId").attr("value")),
 			$previousTarget = $snippet.data("previousTarget");
-		if($previousTarget) $previousTarget.unbind("play end");
+		if($previousTarget) $previousTarget.unbind("fakeClick end");
 		if(!destroy && $target.length) {
 			// Bind the new event
-			$target.bind("play", function( event ) {
-				if(event.target.parentNode == event.currentTarget)
+			$target.bind("fakeClick", function( event ) {
+				if(event.target.parentNode == event.currentTarget) {
 					$snippet.css("opacity", 1);
+					$(event.currentTarget).play();
+				}
 				return false;
 			}).bind("end", function( event ) {
 				if(event.target.parentNode == event.currentTarget)
@@ -96,12 +98,14 @@ $.fn.control = function( $scene ) {
 				$context
 			),
 			$previousTarget = $snippet.data("previous_Target");
-		if($previousTarget) $previousTarget.die("play").die("end");
+		if($previousTarget) $previousTarget.die("fakeClick").die("end");
 		if(!destroy && $target.length) {
 			// Bind the new event
-			$target.live("play", function( event ) {
-				if(event.target.parentNode == event.currentTarget)
+			$target.live("fakeClick", function( event ) {
+				if(event.target.parentNode == event.currentTarget) {
 					$snippet.css("opacity", 1);
+					$(event.currentTarget).play();
+				}
 					
 			}).live("end", function( event ) {
 				if(event.target.parentNode == event.currentTarget)
